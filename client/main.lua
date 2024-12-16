@@ -79,8 +79,13 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         if not powerState and fusesToRepair > 0 then
+            local playerPed = PlayerPedId()
+            if not DoesEntityExist(playerPed) then
+                return
+            end
+            
             for i, pos in ipairs(fusePositions) do
-                local playerCoords = GetEntityCoords(PlayerPedId())
+                local playerCoords = GetEntityCoords(playerPed)
                 local distance = #(playerCoords - pos)
 
                 if distance < 3.0 then
@@ -108,6 +113,10 @@ function StartFuseRepair(index, repairTime)
     local playerPed = PlayerPedId()
     local pos = fusePositions[index]
     fusesToRepair = fusesToRepair - 1
+
+    if not DoesEntityExist(playerPed) then
+        return
+    end
 
     --print("[DEBUG] Reparatur gestartet für Sicherung " .. index .. ". Dauer: " .. repairTime / 1000 .. " Sekunden.")
     

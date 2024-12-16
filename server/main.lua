@@ -36,12 +36,6 @@ AddEventHandler("power:repairFuse", function()
     end
 end)
 
-AddEventHandler("playerConnecting", function(source)
-    local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
-    TriggerClientEvent("power:updateState", Player, powerState) -- Synchronisiere Zustand beim Spieler-Join
-end)
-
 RegisterCommand('blackouton', function(source, args)
     powerState = false
     requiredRepairs = math.random(5, MAX_REPAIR_FUSES)
