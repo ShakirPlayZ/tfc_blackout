@@ -1,4 +1,4 @@
-local powerState = CONFIG_POWER_OFF_AT_SERVER_START
+local powerState = true
 
 local fusesToRepair = 0
 local fusePositions = {}

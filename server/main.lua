@@ -1,5 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-local powerState = CONFIG_POWER_OFF_AT_SERVER_START
+local powerState = true
 local requiredRepairs = 0 -- Anzahl der zu reparierenden Sicherungen
 
 -- Event zum Umschalten des Stroms
@@ -13,11 +13,13 @@ end)
 -- Event zum Starten eines Stromausfalls
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(math.random(5000, 640000)) -- Warte
-        powerState = false
-        requiredRepairs = math.random(5, MAX_REPAIR_FUSES) -- Zufällige Anzahl an Sicherungen
-        print("[DEBUG] Stromausfall ausgelöst. Es müssen " .. requiredRepairs .. " Sicherungen repariert werden.")
-        TriggerClientEvent("power:startBlackout", -1, requiredRepairs)
+        Citizen.Wait(math.random(MIN_WAIT_TIMER, MAX_WAIT_TIMER)) -- Warte min. 1 Minute
+        if powerState then
+            powerState = false
+            requiredRepairs = math.random(5, MAX_REPAIR_FUSES) -- Zufällige Anzahl an Sicherungen
+            print("[DEBUG] Stromausfall ausgelöst. Es müssen " .. requiredRepairs .. " Sicherungen repariert werden.")
+            TriggerClientEvent("power:startBlackout", -1, requiredRepairs)
+        end
     end
 end)
 

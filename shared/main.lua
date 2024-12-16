@@ -1,6 +1,3 @@
---[[ Define the Power Status at Server Start (Default: true = Power is On / false = Power is Off) ]]
-CONFIG_POWER_OFF_AT_SERVER_START = false
-
 POSSIBLE_FUSE_POS = {
     vector3(2811.04, 1510.7, 24.03),
     vector3(2807.97, 1504.13, 24.03),
@@ -17,3 +14,6 @@ POSSIBLE_FUSE_POS = {
 MIN_REPAIR_TIME = 1000 -- Min. Reparaturzeit in Millisekunden
 MAX_REPAIR_TIME = 5000 -- Max. Reparaturzeit in Millisekunden
 MAX_REPAIR_FUSES = 9 -- Sollte maximal dieselbe länge -1 , wie die anzahl der Items in der POSSIBLE_FUSE_POS List sein
+
+MIN_WAIT_TIMER = 5000 -- Wann der Strom frühestens ausfällt
+MAX_WAIT_TIMER = 30000 -- Wann der Strom spätestens ausfällt
